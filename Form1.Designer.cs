@@ -33,13 +33,13 @@
             txtId = new TextBox();
             txtNome = new TextBox();
             label2 = new Label();
-            txtCpf = new TextBox();
             label3 = new Label();
             txtEmail = new TextBox();
             label4 = new Label();
             btnAdicionar = new Button();
             btnEditar = new Button();
             btnRemover = new Button();
+            txtCpf = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)dgPessoa).BeginInit();
             SuspendLayout();
             // 
@@ -51,6 +51,7 @@
             dgPessoa.RowTemplate.Height = 25;
             dgPessoa.Size = new Size(681, 144);
             dgPessoa.TabIndex = 0;
+            dgPessoa.CellContentClick += dgPessoa_CellContentClick;
             // 
             // label1
             // 
@@ -87,13 +88,6 @@
             label2.Size = new Size(40, 15);
             label2.TabIndex = 3;
             label2.Text = "Nome";
-            // 
-            // txtCpf
-            // 
-            txtCpf.Location = new Point(12, 135);
-            txtCpf.Name = "txtCpf";
-            txtCpf.Size = new Size(152, 23);
-            txtCpf.TabIndex = 6;
             // 
             // label3
             // 
@@ -139,6 +133,7 @@
             btnEditar.TabIndex = 10;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnRemover
             // 
@@ -148,18 +143,28 @@
             btnRemover.TabIndex = 11;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
+            btnRemover.Click += btnRemover_Click;
+            // 
+            // txtCpf
+            // 
+            txtCpf.Location = new Point(12, 135);
+            txtCpf.Mask = "###.###.###-##";
+            txtCpf.Name = "txtCpf";
+            txtCpf.Size = new Size(152, 23);
+            txtCpf.TabIndex = 12;
+            txtCpf.MaskInputRejected += maskedTextBox1_MaskInputRejected;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(711, 402);
+            Controls.Add(txtCpf);
             Controls.Add(btnRemover);
             Controls.Add(btnEditar);
             Controls.Add(btnAdicionar);
             Controls.Add(txtEmail);
             Controls.Add(label4);
-            Controls.Add(txtCpf);
             Controls.Add(label3);
             Controls.Add(txtNome);
             Controls.Add(label2);
@@ -174,6 +179,11 @@
             PerformLayout();
         }
 
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
         #endregion
 
         private DataGridView dgPessoa;
@@ -181,12 +191,12 @@
         private TextBox txtId;
         private TextBox txtNome;
         private Label label2;
-        private TextBox txtCpf;
         private Label label3;
         private TextBox txtEmail;
         private Label label4;
         private Button btnAdicionar;
         private Button btnEditar;
         private Button btnRemover;
+        private MaskedTextBox txtCpf;
     }
 }

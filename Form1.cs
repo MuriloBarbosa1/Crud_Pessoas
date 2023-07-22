@@ -52,5 +52,36 @@ namespace CadastroPessoa
             var pessoaRepositorio = new PessoaRepositorio();
             BuscarTodasAsPessoas(pessoaRepositorio);
         }
+
+
+
+        private void dgPessoa_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null)
+                return;
+
+            txtId.Text = dgv.CurrentRow.Cells["Id"]?.Value?.ToString();
+            txtNome.Text = dgv.CurrentRow.Cells["Nome"]?.Value?.ToString();
+            txtCpf.Text = dgv.CurrentRow.Cells["CPF"]?.Value?.ToString();
+            txtEmail.Text = dgv.CurrentRow.Cells["Email"]?.Value?.ToString();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            var pessoa = new Pessoa(Convert.ToInt32(txtId.Text), txtNome.Text, txtCpf.Text, txtEmail.Text);
+            var pRepositorio = new PessoaRepositorio();
+            pRepositorio.Atualizar(pessoa);
+            LimparCampos();
+            BuscarTodasAsPessoas(pRepositorio);
+        }
+
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+            var pRepositorio = new PessoaRepositorio();
+            pRepositorio.Deletar(Convert.ToInt32(txtId.Text));
+            LimparCampos();
+            BuscarTodasAsPessoas(pRepositorio);
+        }
     }
 }
